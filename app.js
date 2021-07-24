@@ -22,4 +22,18 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+// call the getBeers() method which returns a promise that should be resolved with an array of 25 beers.
+app.get('/beers', (req, res) => {
+  punkAPI.getBeers().then(apiResponse => {
+    res.render('beers', { apiResponse });
+  });
+});
+
+
+app.get('/random-beer', (req, res) => {
+  punkAPI
+    .getRandom()
+    .then(apiResponse => res.render('random-beer', { apiResponse }));
+});
+
 app.listen(3000, () => console.log('🏃‍ on port 3000'));
